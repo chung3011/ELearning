@@ -1,0 +1,37 @@
+<% provide :title, t(".title") %>
+<div class="container">
+  <div class="gray-center-box">
+    <h1 class="text-center"><%= t(".title") %></h1>
+    <div class="box-col">
+      <%= form_for :session, url: login_path do |f| %>
+        <div class="form-frame">
+          <div class="input-group my-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            </div>
+            <%= f.email_field :mail, class: "form-control form-size", placeholder: t(".mail") %>
+          </div>
+          <div class="input-group my-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-lock"></i></span>
+            </div>
+            <%= f.password_field :password, class: "form-control form-size", placeholder: t(".password") %>
+          </div>
+        </div>
+        <div class="container">
+          <%= f.label :remember_me, class: "checkbox inline" do %>
+            <%= f.check_box :remember_me %>
+            <span><%= t(".remeber") %></span>
+          <% end %>
+        </div>
+        <div class="container my-3">
+          <%= f.submit t(".title"), class: "btn btn-primary" %>
+        </div>
+      <% end %>
+      <p class="text-center"> <%= link_to t(".forgot"), new_password_reset_path %></p>
+      <p class="text-center"> <%= t(".account") %> <%= link_to t(".signup"), signup_path %></p>
+      <p class="text-center"><%= link_to t(".google"), "/auth/google_oauth2" %></p>
+      <p class="text-center"><%= link_to "Sign in as Admin", new_admin_session_path %></p>
+    </div>
+  </div>
+</div>

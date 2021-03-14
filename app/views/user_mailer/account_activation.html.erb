@@ -1,0 +1,8 @@
+<h1>Udemy</h1>
+
+<p>Hello <%= @user.name %></p>
+
+<p>Welcome to Udemy! Click on the link below to activate your account:</p>
+
+<%= link_to "Activate", edit_account_activation_url(id: @user.activation_token,
+    mail: @user.mail) %>

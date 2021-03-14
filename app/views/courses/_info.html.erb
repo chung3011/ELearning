@@ -1,0 +1,9 @@
+<p><strong>Name:</strong><%= @course.name %></p>
+<p><strong>Description:</strong><%= @course.description %></p>
+<p><strong>Number of lesson:</strong><%= @lessons.size %></p>
+<p><strong>Category:</strong><%= @course.category.name %></p>
+<% @tags.each do |tag| %>
+  <button type="button" class="btn btn-secondary mx-2 text-center">
+    <%= link_to tag.name , tag_index_path(id: tag.id), class:"text-white" %>
+  </button>
+<% end %>

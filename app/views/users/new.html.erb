@@ -1,0 +1,40 @@
+<% provide :title, t(".title") %>
+<div class="container">
+  <div class="gray-center-box">
+    <h1 class="text-center"><%= t(".title") %></h1>
+    <div class="box-col">
+      <%= form_for(@user, url: signup_path) do |f| %>
+        <div class="form-frame">
+          <%= render "shared/error_messages", object: f.object %>
+          <div class="input-group my-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-user"></i></span>
+            </div>
+            <%= f.text_field :name, class: "form-control form-size", placeholder: t(".name") %>
+          </div>
+          <div class="input-group my-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            </div>
+            <%= f.email_field :mail, class: "form-control form-size", placeholder: t(".mail") %>
+          </div>
+          <div class="input-group my-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-lock"></i></span>
+            </div>
+            <%= f.password_field :password, class: "form-control form-size", placeholder: t(".password") %>
+          </div>
+          <div class="input-group my-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-lock"></i></span>
+            </div>
+            <%= f.password_field :password_confirmation, class: "form-control form-size", placeholder: t(".confirm") %>
+          </div>
+        </div>
+        <div class="container">
+          <%= f.submit t(".title"), class: "btn btn-primary my-3" %>
+        </div>
+      <% end %>
+    </div>	
+  </div>
+</div>

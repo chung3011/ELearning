@@ -1,0 +1,52 @@
+<div class="card-header d-flex justify-content-between" data-toggle="collapse" data-target="#lesson-<%= lesson.id %>" aria-controls="#lesson-<%= lesson.id %>">
+  <div>
+    <h5><%= lesson.sequence %>. <%= lesson.name %></h5>
+    <p><%= lesson.description %></p>
+  </div>
+  <%= link_to edit_lesson_path(id: lesson) do %>
+    <i class="far fa-edit"></i>
+  <% end %>
+</div>
+<br>
+<div class="collapse multi-collapse" id="lesson-<%= lesson.id %>">
+  <div class="d-flex">
+    <div class="col-5"> <iframe class="embed-responsive-item embed-responsive-4by3 video" src="<%= lesson.video %>" frameborder="0"></iframe></div>
+    <div class="col-7">
+      <div class="d-flex align-items-center mb-3">
+        <h5>Question List</h5>
+        <%= link_to "+", new_question_path(lesson_id: lesson.id), class: "btn btn-primary ml-3" %>
+      </div>
+      <ul class="list-group">
+        <% lesson.questions.each_with_index do |question, index| %>
+          <li class="list-group-item d-flex justify-content-between" data-toggle="collapse" data-target="#question-<%= question.id %>" aria-controls="#question-<%= question.id %>">
+            <p><%= index+1 %>. <%= question.content %></p>
+            <%= link_to edit_question_path(question) do %>
+              <i class="far fa-edit"></i>
+            <% end %>
+          </li>
+          <div id="question-<%= question.id %>" class="collapse">
+            <% question.answers.each_with_index do |answer, index| %>
+              <div class="box-comment p-3 m-2">
+                <h5><%= index+1 %>. <%= answer.content %></h5>
+                <span>Point: <%= answer.point %></span>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <% if lesson.user_exams.present? %>
+    <h5 class="card-title mt-3">Exam List</h5>
+    <div class="scroll">
+      <% lesson.user_exams.each do |user_exam| %>
+        <div class="box-exam">
+          <h5><%= user_exam.user.name %></h5>
+          <p>Point: <%= user_exam.point %></p>
+          <span>Time: <%= user_exam.created_at.strftime("%H:%M %d/%m/%Y") %></span>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+<br>

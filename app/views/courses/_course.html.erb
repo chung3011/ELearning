@@ -1,0 +1,13 @@
+<div class="col-3">
+  <div class="box-course card-block col">
+    <h4 class="card-title"><%= link_to course.name , course %></h4>
+    <h6 class="card-subtitle mb-2 text-muted"><%= course.category.name %></h6>
+    <p class="card-text overflow-auto"><%= course.description %></p>
+    <span>
+      <i class="fas fa-user mr-2"></i><%= course.user_courses.count %>
+    </span>
+    <% if logged_in? %>
+      <%= button_to 'Join', user_courses_path(course_id: course.id), class: 'btn btn-primary btn-sm' %>
+    <% end %>
+  </div>
+</div>

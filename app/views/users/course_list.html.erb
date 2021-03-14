@@ -1,0 +1,24 @@
+<% provide :title, t(".title") %>
+<div class="home">
+  <div class="my-4 scroll">
+    <% if @courses.blank? %>
+      <h4><%= t(".course_blank") %></h4>
+    <% else %>
+      <% @courses.each do |course| %>
+        <div class="col-3">
+          <div class="box-course card-block col">
+            <h4 class="card-title"><%= course.name %></h4>
+            <h6 class="card-subtitle mb-2 text-muted"><%= course.category.name %></h6>
+            <p class="card-text overflow-auto"><%= course.description %></p>
+            <span>
+              <%= link_to "Detail", course %>
+              <i class="fas fa-user ml-3 mr-2"></i><%= course.user_courses.count %>
+            </span>
+            <% user_course = course.user_courses.find_by(user_id: current_user) %>
+            <%= link_to 'Delete', user_course_path(user_course), method: :delete, class: 'btn btn-secondary btn-sm' %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

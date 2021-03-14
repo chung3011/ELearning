@@ -1,0 +1,8 @@
+<div class="white-box nested-fields">
+  <div class="d-flex justify-content-between">
+    <h5>Answer</h5>
+    <%= link_to_remove_association "x", f, class: "btn btn-danger" %>
+  </div>
+  <%= f.input :content %>
+  <%= f.input :point, collection: [1,0] %>
+</div>

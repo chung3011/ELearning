@@ -1,0 +1,27 @@
+<div class="home">
+  <h5>Course List (<%= @course_tags.size %>) </h5>
+  <div class="scroll my-3">
+    <% @course_tags.each do |course_tag| %>
+      <% course = course_tag.course %>
+      <div class="col-2">
+        <div class="box-course card-block col">
+          <h4 class="card-title"><%= link_to course.name , course %></h4>
+          <h6 class="card-subtitle mb-2 text-muted"><%= course.category.name %></h6>
+          <p class="card-text overflow-auto"><%= course.description %></p>
+          <span>
+            <i class="fas fa-user mr-2"></i><%= course.user_courses.count %>
+          </span>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <h5>Follow user (<%= @follow_tags.size %>) </h5>
+  <div class="scroll my-3">
+    <% @follow_tags.each do |follow_tag| %>
+      <div class="box-exam">
+        <h5><%= follow_tag.user.name %></h5>
+        <span>Time register: <%= follow_tag.created_at.strftime("%H:%M %d/%m/%Y") %></span>
+      </div>
+    <% end %>
+  </div>
+</div>

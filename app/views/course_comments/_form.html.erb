@@ -1,0 +1,5 @@
+<%= form_for @course_comment, remote: true, class:"form-control" do |f| %>
+  <%= f.text_field :content %>
+  <%= f.hidden_field :course_id, :value => @course.id %>
+  <%= f.submit "Comment", class:"btn btn-primary" %>
+<% end %>

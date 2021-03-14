@@ -1,0 +1,9 @@
+$("#course_rate-<%= @course_rate.id %>").remove();
+
+$('#rate_average').html(
+  "<span><%= escape_javascript(render_stars(@course.course_rates.average(:point))) %></span>"
+);
+
+$('#rate .rate-list').prepend(
+  "<span><%= escape_javascript(render "course_rates/form") %></span>"
+);

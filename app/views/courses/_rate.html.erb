@@ -1,0 +1,7 @@
+<div class="my-2" id="course_rate-<%= rate.id %>">
+  <%= rate.user.name %>
+  <%= render_stars(rate.point) %>
+  <% if current_user == rate.user %>
+    <%= link_to "x", course_rate_path(rate), method: :delete, remote: true, class:"btn btn-danger btn-sm" %>
+  <% end %>
+</div>

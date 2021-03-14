@@ -1,0 +1,20 @@
+<div class="home">
+  <% if @tags.blank? %>
+    <span>You havent followed any tag!</span>
+  <% else %>
+    <div class="row">
+      <% @tags.each do |tag| %>
+        <div class="mx-4 row">
+          <%= link_to tag.name , tag_index_path(id: tag.id), class:"btn btn-primary mr-1 text-white text-center" %>
+          <% follow_tag = tag.follow_tags.find_by(user_id: current_user) %>
+          <%= link_to "-", follow_tag_path(follow_tag), method: :delete , class:"btn btn-secondary text-white text-center"%>
+        </div>
+      <% end %>
+    </div>
+    <div class="my-4 scroll">
+      <% @courses.each do |course| %>
+        <%= render course %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

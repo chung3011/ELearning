@@ -1,0 +1,10 @@
+<% provide :title, t(".title") + @tag.name %>
+<div class="home">
+  <button type="button" class="btn btn-secondary mx-2 text-center"><%= @tag.name %></button>
+
+  <div class="my-4 scroll">
+    <% @courses.each do |course| %>
+      <%= render @courses %>
+    <% end %>
+  </div>
+</div>

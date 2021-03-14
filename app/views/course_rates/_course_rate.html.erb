@@ -1,0 +1,9 @@
+<div class="gray-box" id="course_rate-<%= course_rate.id %>">
+  <div>
+    <%= course_rate.user.name %>
+    <%= render_stars(course_rate.point) %>
+    <% if current_user == course_rate.user %>
+      <%= link_to "x", course_rate_path(course_rate), method: :delete, remote: true, class:"btn btn-danger btn-sm float-right" %>
+    <% end %>
+  </div>
+</div>

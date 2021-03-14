@@ -1,0 +1,15 @@
+<div id="rate-form">
+  <div class="row mx-1 my-3">
+    <% 5.times do |index| %>
+      <%= form_for @course_rate, remote: true do |f| %>
+        <%= f.hidden_field :course_id, :value => @course.id %>
+        <%= f.hidden_field :point, :value => (index+1) %>
+        <span class="fa-stack">
+          <span class="fa fa-star fa-stack-2x"></span>
+          <strong class="fa-stack-1x" style="font-size:80%; color:white"><%= index + 1 %></strong>
+          <%= f.submit "rate", style:"opacity: 0" %>
+        </span>
+      <% end %>
+    <% end %>
+  </div>
+</div>

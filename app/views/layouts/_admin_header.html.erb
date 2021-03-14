@@ -1,0 +1,4 @@
+<nav class="navbar sticky-top navbar-light navbar-custom shadow">
+  <%= link_to "Admin", admin_path, class: "brand-name" %>
+  <button type="button" class="btn btn-primary float-right"><%= link_to "Log out", destroy_admin_session_path, method: :delete, class: "text-white" %></button>
+</nav>

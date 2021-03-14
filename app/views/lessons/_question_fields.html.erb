@@ -1,0 +1,13 @@
+<div class="white-box nested-fields div-relative">
+  <div class="d-flex justify-content-between">
+    <h5>Question</h5>
+    <%= link_to_remove_association "x", f, class: "btn btn-danger" %>
+  </div>
+  <%= f.input :content %>
+  <div class="answers mb-4">
+    <%= f.fields_for :answers do |answer| %>
+      <%= render "answer_fields", f: answer %>
+    <% end %>
+  </div>
+  <%= link_to_add_association "Add answer", f, :answers, class: "btn btn-primary align-self-center div-bottom", "data-association-insertion-method" => "append" %>
+</div>

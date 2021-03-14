@@ -1,0 +1,21 @@
+<% provide :title, t(".title") %>
+<div class="container">
+  <div class="gray-center-box">
+    <h1 class="text-center"><%= t(".title") %></h1>
+    <div class="box-col">
+      <%= form_for :password_reset, url: password_resets_path do |f| %>
+        <div class="form-frame">
+          <div class="input-group my-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            </div>
+            <%= f.email_field :mail, class: "form-control form-size", placeholder: t(".mail") %>
+          </div>
+        </div>
+        <div class="container">
+          <%= f.submit t(".submit"), class: "btn btn-primary my-3" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

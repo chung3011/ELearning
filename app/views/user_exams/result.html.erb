@@ -1,0 +1,24 @@
+<div class="home">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><%= link_to @lesson.course.name , course_path(@lesson.course) %></li>
+      <li class="breadcrumb-item" ><%= @lesson.name %></li>
+      <li class="breadcrumb-item active" aria-current="page" > Point: <%= @user_exam.point %></li>
+    </ol>
+  </nav>
+  <br>
+  <br>
+  <% @questions.each_with_index do |question, index| %>
+    <h5><%= index + 1 %>. <%= question.content %></h5>
+    <ul>
+      <% question.answers.each do |answer| %>
+        <% choose_answer = @user_exam.answers.include?(answer) %>
+        <% if choose_answer %>
+          <p class="<%= answer.point == 1 ? 'text-green' : 'text-red' %>"><%= answer.content %><i class="far fa-check-circle"></i></p>
+        <% else %>
+          <p class="<%= answer.point == 1 ? 'text-green' : '' %>"><%= answer.content %></p>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

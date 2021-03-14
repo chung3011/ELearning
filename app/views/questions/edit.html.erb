@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="gray-center-box">
+    <%= simple_form_for @question, url: question_path, method: :patch do |f| %>
+      <%= f.input :content, required: true %>
+      <%= f.hidden_field :lesson_id, value: @lesson.id %>
+      <div class="answers">
+        <%= f.fields_for :answers do |answer| %>
+          <%= render "answer_fields", f: answer %>
+        <% end %>
+      </div>
+      <%= link_to_add_association "Add answer", f, :answers, class: "btn btn-primary", "data-association-insertion-method" => "append", "data-association-insertion-node" => ".answers" %>
+      <%= f.button :submit, class:"btn btn-primary my-3" %>
+    <% end %>
+  </div>
+</div>

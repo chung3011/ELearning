@@ -1,0 +1,27 @@
+<div class="home">
+  <div class="scroll">
+    <% if @user_exams.present?  %>
+      <% @user_exams.each do |user_exam| %>
+        <div class="box-exam card-block col-3">
+          <h4 class="card-title"><%= link_to user_exam.lesson.course.name, user_exam.lesson.course %></h4>
+          <h5 class="card-subtitle mb-2 text-muted"><%= user_exam.lesson.name %></h6>
+          <br>
+          <p>Point: <%= user_exam.point %><p>
+          <div class="container my-3">
+            <% if user_exam.point > 3 %>
+              <%= button_to 'Test again', user_exams_path(lesson_id: user_exam.lesson.id), class: 'btn btn-primary mr-3' %>
+              <%= form_tag result_path, method: :get do %>
+                <%= hidden_field_tag :id, params[:id], value: user_exam.id %>
+                <%= submit_tag "Result", class: "btn btn-primary" %>
+              <% end %>
+            <% else %>
+              <%= button_to 'Test again', user_exams_path(lesson_id: user_exam.lesson.id), class: 'btn btn-primary' %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <h5>You havent done any exam</h5>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<div class="home">
+  <h2 class="my-5"><%= @category.name %></h2>
+    <div class="my-4 scroll">
+      <% if @courses.blank? %>
+        <p>Dont have any course</p>
+      <% else %>
+        <% @courses.each  do |course| %>
+          <%= render course %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="home">
+  <div class="col">
+    <div class="card-header">
+      <h5>User: <%= @user.name %></h5>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title mb-3">Follow tag</h5>
+      <% @user.tags.each do |tag| %>
+        <a class="btn btn-secondary"><%= tag.name %></a>
+      <% end %>
+
+      <h5 class="card-title my-3">Course List</h5>
+      <% @courses.each do |course| %>
+        <% status =  course_status(@user, course) %>
+        <div class="card-header" data-toggle="collapse" data-target="#course-<%= course.id %>" aria-controls="#course-<%= course.id %>">
+          <h5><%= course.name %></h5>
+          <div class="progress my-3">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: <%= status %>%;" aria-valuenow="<%= status %>" aria-valuemin="0" aria-valuemax="100"><%= status %>%</div>
+          </div>
+        </div>
+        <br>
+        <div class="collapse multi-collapse" id="course-<%= course.id %>">
+          <ul class="list-group">
+            <% course.lessons.each do |lesson| %>
+              <li class="list-group-item" data-toggle="collapse" data-target="#lesson-<%= lesson.id %>" aria-controls="#lesson-<%= lesson.id %>">
+                <span class="<%= lesson_joined?(@user,lesson) ? 'text-green' : '' %>"><%= lesson.name %></span>
+                <span class="float-right"> Average point: <%= average_point(@user,lesson) %></span>
+              </li>
+              <div id="lesson-<%= lesson.id %>" class="collapse">
+                <div class="scroll">
+                  <% exam_list(@user,lesson).each do |exam| %>
+                    <div class="box-exam">
+                      <h5>Point: <%= exam.point %></h5>
+                      <span>Time: <%= exam.created_at.strftime("%H:%M %d/%m/%Y") %></span>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          </ul>
+        </div>
+        <br>
+      <% end %>
+    </div>
+  </div>
+</div>

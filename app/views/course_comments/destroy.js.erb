@@ -1,0 +1,5 @@
+$("#course_comment-<%= @course_comment.id %>").remove();
+
+$('#comment-size').html(
+  "<h5>(<%= @course_comment.course.course_comments.size %>)</h5>"
+);

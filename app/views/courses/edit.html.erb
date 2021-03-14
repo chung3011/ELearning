@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="gray-center-box">
+    <%= simple_form_for @course, url: course_path, method: :patch do |f| %>
+      <%= f.input :name %>
+      <%= f.input :description %>
+      <%= f.input :available, collection: [true, false] %>
+      <%= f.input :category_id, collection: Category.pluck(:id, :name), label_method: :last, value_method: :first %>
+      <div id="sortable">
+        <h5>Lesson List</h5>
+        <%= f.fields_for :lessons do |lesson| %>
+          <%= render "lesson", f: lesson %>
+        <% end %>
+      </div>
+      <%= f.button :submit, class:"btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+
+<script>
+  $(document).on('turbolinks:load', function(){
+    $("#sortable").sortable({
+      update: function(event, ui) {
+        $('.sequence').each(function(i){
+          $(this).val(i+1);
+        });
+      }
+    })
+  });
+</script>

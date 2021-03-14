@@ -1,0 +1,154 @@
+<div class="row my-3">
+  <div class="nav flex-column nav-pills col-2" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+    <a class="nav-link active admin-nav" id="v-pills-user-tab" data-toggle="pill" href="#v-pills-user" role="tab" aria-controls="v-pills-user" aria-selected="true">
+      <h5>User</h5><span class="badge badge-primary badge-pill"><%= @users.size %></span>
+    </a>
+    <a class="nav-link mt-3 admin-nav" id="v-pills-course-tab" data-toggle="pill" href="#v-pills-course" role="tab" aria-controls="v-pills-course" aria-selected="false">
+      <h5>Course</h5><span class="badge badge-primary badge-pill"><%= @courses.size %></span>
+    </a>
+    <a class="nav-link mt-3 admin-nav" id="v-pills-category-tab" data-toggle="pill" href="#v-pills-category" role="tab" aria-controls="v-pills-category" aria-selected="false">
+      <h5>Category</h5><span class="badge badge-primary badge-pill"><%= @categories.size %></span>
+    </a>
+    <a class="nav-link mt-3 admin-nav" id="v-pills-tag-tab" data-toggle="pill" href="#v-pills-tag" role="tab" aria-controls="v-pills-tag" aria-selected="false">
+      <h5>Tag</h5><span class="badge badge-primary badge-pill"><%= @tags.size %></span>
+    </a>
+  </div>
+  <div class="tab-content col-10" id="v-pills-tabContent">
+    <div class="tab-pane fade show active" id="v-pills-user" role="tabpanel" aria-labelledby="v-pills-user-tab">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th colspan="1">Name</th>
+            <th colspan="1">Mail</th>
+            <th colspan="1">Status</th>
+            <th colspan="3">Option</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each_with_index do |user, index| %>
+            <tr>
+              <th scope="row"><%= index+1 %></th>
+              <td><%= user.name %></td>
+              <td><%= user.mail %></td>
+              <td>
+                <% if user.deleted_at.nil? %>
+                  <i class="far fa-check-circle"></i>
+                <% else %>
+                  <i class="fas fa-ban"></i>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to admin_user_info_path(id: user.id) do %>
+                  <i class="far fa-eye"></i>
+                <% end %>
+                <%= link_to user_destroy_path(id: user.id), method: :delete, data: { confirm: 'Are you sure?' } do %>
+                  <i class="far fa-trash-alt"></i>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane fade" id="v-pills-course" role="tabpanel" aria-labelledby="v-pills-course-tab">
+      <button class="btn btn-primary mt-3" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        New Course
+      </button>
+      <div class="collapse" id="collapseExample">
+        <%= render "courses/form" %>
+      </div>
+      <table class="table table-striped mt-3">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th colspan="1">Name</th>
+            <th colspan="1">Description</th>
+            <th colspan="1">Available</th>
+            <th colspan="3">Option</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @courses.each_with_index do |course, index| %>
+            <tr>
+              <th scope="row"><%= index+1 %></th>
+              <td><%= course.name %></td>
+              <td><%= course.description %></td>
+              <td>
+                <% if course.available %>
+                  <i class="far fa-check-circle"></i>
+                <% else %>
+                  <i class="fas fa-ban"></i>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to admin_course_info_path(id: course.id) do %>
+                  <i class="far fa-eye"></i>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane fade" id="v-pills-category" role="tabpanel" aria-labelledby="v-pills-category-tab">
+      <%= link_to "New Category", new_category_path, class:"btn btn-primary" %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th colspan="1">Name</th>
+            <th colspan="3">Option</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @categories.each_with_index do |category, index| %>
+            <tr>
+              <th scope="row"><%= index+1 %></th>
+              <td><%= category.name %></td>
+              <td>
+                <%= link_to category_path(id: category.id) do %>
+                  <i class="far fa-eye"></i>
+                <% end %>
+                <%= link_to edit_category_path(id: category.id) do %>
+                  <i class="far fa-edit"></i>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane fade" id="v-pills-tag" role="tabpanel" aria-labelledby="v-pills-tag-tab">
+      <%= link_to "New Tag", new_tag_path, class:"btn btn-primary" %>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th colspan="1">Name</th>
+            <th colspan="3">Option</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @tags.each_with_index do |tag, index| %>
+            <tr>
+              <th scope="row"><%= index+1 %></th>
+              <td><%= tag.name %></td>
+              <td>
+                <%= link_to tag_path(id: tag.id) do %>
+                  <i class="far fa-eye"></i>
+                <% end %>
+                <%= link_to edit_tag_path(id: tag.id) do %>
+                  <i class="far fa-edit"></i>
+                <% end %>
+                <%= link_to tag_path(id: tag.id), method: :delete, data: { confirm: 'Are you sure?' } do %>
+                  <i class="far fa-trash-alt"></i>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

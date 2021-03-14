@@ -1,0 +1,116 @@
+en:
+  activerecord:
+    attributes:
+      user:
+        name: "Name"
+        mail: "Mail"
+        password: "Password"
+        password_confirmation: "Password Confirmation"
+    errors:
+      models:
+        user:
+          attributes:
+            name:
+              blank: "can't be blank"
+            mail:
+              blank: "can't be blank"
+              invalid: "is invalid."
+              taken: "has already been taken"
+            password:
+              blank: "can't be blank"
+            password_confirmation:
+              confirmation: "doesn't match Password"
+  layouts:
+    header:
+      category: "Category"
+      course: "Courses"
+      search: "Search"
+      my_course: "My Course"
+      profile: "Profile"
+      edit: "Edit"
+      logout: "Log Out"
+      account: "Account"
+      login: "Log In"
+      signup: "Sign Up"
+      tag: "Tag Follow"
+    footer:
+      en: "English"
+      vi: "Vietnamese"
+  sessions:
+    new:
+      title: "Log In"
+      mail: "Mail"
+      password: "Password"
+      remember: "Remember me"
+      forgot: "Forgot Password?"
+      signup: "Sign Up"
+      account: "Dont have account?"
+      google: "Sign in with Google"
+  users:
+    course_list:
+      title: "Course List"
+      course_blank: "You have not registered for any course"
+      login: "You need to log in"
+    edit:
+      title: "Edit"
+      name: "Name"
+      mail: "Mail"
+      password: "Password"
+      confirm: "Password Confirm"
+    new:
+      title: "Sign Up"
+      name: "Name"
+      mail: "Mail"
+      password: "Password"
+      confirm: "Password Confirm"
+    show:
+      title: "Profile"
+      edit: "Edit"
+  shared:
+    error_messages:
+      error_message: " prohibited this user from being saved:"
+      error: "error"
+  user_courses:
+    create:
+      error: "User already register this course"
+      success: "Register success"
+    destroy:
+      delete: "Course Deleted"
+  user_lessons:
+    create:
+      success: "Join Success"
+    destroy:
+      delete: "Lesson Cancelled"
+  tags:
+    index:
+      title: "Tag"
+  account_activations:
+    success: "Account activated!"
+    fail: "Invalid activation link"
+  user_mailer:
+    account_activation:
+    password_reset:
+  activate: "Activate"
+  password_resets:
+    create:
+    update:
+    expired: "Password reset has expired."
+    user_not_found: "User not found"
+    edit:
+      title: "Edit password"
+      password: "Password"
+      confirm: "Password Confirm"
+      submit: "Submit"
+    new:
+      title: "Forgot password"
+      mail: "Mail"
+      submit: "Submit"
+  home:
+    category:
+      title: "Category "
+  follow_tags:
+    create:
+      success: "Follow Success"
+      error: "Error"
+    destroy:
+      delete: "Unfollow Tag Success"

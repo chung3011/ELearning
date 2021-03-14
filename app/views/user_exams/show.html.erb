@@ -1,0 +1,24 @@
+<div class="home">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><%= link_to @lesson.course.name , course_path(@lesson.course) %></li>
+      <li class="breadcrumb-item active" aria-current="page"><%= @lesson.name %></li>
+    </ol>
+  </nav>
+  <br>
+
+  <%= form_for @user_exam, url: user_exam_path(@user_exam), method: :patch do |f| %>
+    <% @questions.each_with_index do |question, index| %>
+      <h5><%= index + 1 %>. <%= question.content %></h5>
+      <%= f.fields_for :user_answers do |user_answer| %>
+        <% question.answers.each do |answer| %>
+          <%= user_answer.hidden_field :user_exam_id, value: @user_exam.id %>
+          <%= user_answer.radio_button :answer_id, answer.id, required: true %>
+          <%= answer.content %> <br>
+        <% end %>
+      <% end %>
+    <% end %>
+    <br>
+    <%= f.submit "Submit", class: "btn btn-primary" %>
+  <% end %>
+</div>

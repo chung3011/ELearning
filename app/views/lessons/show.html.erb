@@ -1,0 +1,24 @@
+<% provide :title, "Lesson " + @lesson.name %>
+<div class="home">
+  <p>
+    <strong>Course:</strong>
+    <%= link_to @course.name , course_path(id: @course.id) %>
+  </p>
+  <p>
+    <strong>Category:</strong>
+    <%= @course.category.name %>
+  </p>
+  <p>
+    <strong>Name:</strong>
+    <%= @lesson.name %>
+  </p>
+  <p>
+    <strong>Description:</strong>
+    <%= @lesson.description %>
+  </p>
+  <p>
+    <div class="embed-responsive embed-responsive-16by9">
+      <iframe class="embed-responsive-item" src="<%= @lesson.video %>"></iframe>
+    </div>
+  </p>
+</div>

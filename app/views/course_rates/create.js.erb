@@ -1,0 +1,7 @@
+$("<%= escape_javascript(render "course_rate", course_rate: @course_rate) %>").prependTo("#rates");
+
+$('#rate_average').html(
+  "<span><%= escape_javascript(render_stars(@course.course_rates.average(:point))) %></span>"
+);
+
+$("#rate-form").remove();

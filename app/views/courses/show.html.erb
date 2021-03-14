@@ -1,0 +1,86 @@
+<%= javascript_pack_tag 'course' %>
+<% provide :title, "Course " + @course.name %>
+<div class="row">
+  <div class="col-4 sidenav">
+    <div class="list-group" id="list-tab" role="tablist">
+      <% @lessons.each do |lesson| %>
+        <%= render lesson %>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-8" style="padding-left: 0px !important;">
+    <div class="lesson-content">
+      <% if logged_in? %>
+        <div class="tab-content" id="nav-tabContent">
+          <% @lessons.each do |lesson| %>
+            <div class="tab-pane fade show <%= first_lesson?(lesson) ? 'active' : '' %>" id="list-<%= lesson.id %>" role="tabpanel" aria-labelledby="list-<%= lesson.id %>-list">
+              <div class="container">
+                <iframe class="embed-responsive-item embed-responsive-16by9 video" src="<%= lesson.video %>" frameborder="0"></iframe>      
+              </div>
+              <div class="lesson-description">
+                <div class="col-8">
+                  <%= lesson.description %>
+                </div>
+                <div class="col-4">
+                  <div id="button-<%= lesson.id %>">
+                    <% if course_registered?(@course) %>
+                      <% if lesson_registered?(lesson) %>
+                        <button type="button" class="btn btn-primary btn-sm float-right" disabled>Joined</button>
+                      <% elsif first_lesson?(lesson) || joined_previous_lesson?(lesson)%>
+                        <%= button_to 'Join', user_lessons_path(lesson_id: lesson.id), class: 'btn btn-primary btn-sm float-right', remote: true %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                  <%= button_to 'Exam', user_exams_path(lesson_id: lesson.id), class: 'btn btn-primary btn-sm float-right mr-3' %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% elsif %>
+        <h4>You need to log in to see more detail</h4>
+      <% end %>
+    </div>
+    <div class="course-detail ml-3">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Detail</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="comment-tab" data-toggle="tab" href="#comment" role="tab" aria-controls="comment" aria-selected="false">Comment</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a class="nav-link" id="rate-tab" data-toggle="tab" href="#rate" role="tab" aria-controls="rate" aria-selected="false">Rating</a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <div class="p-2 mt-3">
+            <%= render "courses/info" %>
+          </div>
+        </div>
+        <div class="tab-pane" id="comment" role="tabpanel" aria-labelledby="comment-tab">
+          <div class="p-2 mt-3">
+            <%= render "course_comments/form" %>
+            <div class="comment-scroll" id="comments">
+              <% @comments.each do |course_comment| %>
+                <%= render course_comment %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="rate" role="tabpanel" aria-labelledby="rate-tab">
+          <div class="p-2 rate-list">
+            <% if rated? %>
+              <%= render "course_rates/form" %>
+            <% end %>
+            <h5>Average point: <span id="rate_average"><%= render_stars(@rates.average(:point)) %></span></h5>
+            <div class="rate-scroll" id="rates">
+              <%= render @rates %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

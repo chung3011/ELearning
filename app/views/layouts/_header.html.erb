@@ -1,0 +1,58 @@
+<nav class="navbar navbar-expand-xl navbar-light navbar-custom shadow">
+  <%= link_to "Udemy", root_path , class: "brand-name"%>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="container collapse navbar-collapse col-lg-11" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto col-lg-1">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <%= t(".category") %>
+        </a>
+        <div class="dropdown-menu menu-scroll" aria-labelledby="navbarDropdown">
+          <% @categories.each do |category| %>
+             <%= link_to category.name , category_path(id: category.id), class:"dropdown-item" %>
+          <% end %>
+        </div>
+      </li>
+    </ul>
+    <%= form_tag search_path, method: :get, class: "form-inline my-2 my-lg-0 col-lg-9" do %>
+      <%= text_field_tag :name, params[:name], class: "form-control col-lg-10 search-bar", placeholder: t(".course") %>
+      <%= submit_tag t(".search"), class: "btn btn-search col-lg-1" %>
+    <% end %>
+    <ul class=" container navbar-nav mr-auto col-lg-2 text-center">
+      <li class="nav-item">
+        <%= link_to t(".my_course"), courses_list_path, class: "text-decoration-none" %>
+      </li>
+      <% if logged_in? %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= current_user.name %>
+          </a>
+          <ul class="dropdown-menu">
+            <li><%= link_to t(".profile"), profile_path, class: "dropdown-item text-decoration-none" %></li>
+            <li><%= link_to t(".tag"), follow_tags_path, class: "dropdown-item text-decoration-none" %></li>
+            <li><%= link_to "Exam List", exam_list_path, class: "dropdown-item text-decoration-none" %></li>
+            <li><%= link_to t(".edit"), profile_edit_path, class: "dropdown-item text-decoration-none" %></li>
+            <li><%= link_to t(".logout"), logout_path, method: :delete, class: "dropdown-item text-decoration-none" %></li>
+          </ul>
+        </li>
+      <% elsif admin_signed_in? %>
+        <li class="nav-item mr-3">
+          <%= link_to "Admin", admin_path %>
+        </li>
+      <% else %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= t(".account") %>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="dropdown-item" ><%= link_to t(".login"), login_path, class: "text-decoration-none"%></li>
+            <li class="dropdown-item"><%= link_to t(".signup"), signup_path, class: "text-decoration-none" %></li>
+          </ul>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>

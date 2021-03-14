@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="gray-center-box">
+    <%= simple_form_for @lesson, url: lesson_path, method: :patch do |f| %>
+      <%= f.input :name, required: true %>
+      <%= f.input :description, required: true %>
+      <%= f.input :video, required: true %>
+      <%= f.hidden_field :course_id, value: @course.id %>
+      <div class="questions">
+        <%= f.fields_for :questions do |question| %>
+          <%= render "question_fields", f: question %>
+        <% end %>
+      </div>
+      <%= link_to_add_association "Add Question", f, :questions, class: "btn btn-primary", "data-association-insertion-method" => "append", "data-association-insertion-node" => ".questions" %>
+      <br>
+      <br>
+      <%= f.button :submit, class:"btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

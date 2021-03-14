@@ -1,0 +1,9 @@
+<div class="box-comment my-2 p-1" id="course_comment-<%= course_comment.id %>">
+  <div class="ml-2 comment-title">
+    <h5><%= course_comment.user.name %></h5>
+    <% if current_user == course_comment.user %>
+      <%= link_to "x", course_comment_path(course_comment), method: :delete, remote: true, class:"btn btn-danger btn-sm" %>
+    <% end %>
+  </div>
+  <p class="ml-2"><%= course_comment.content %></p>
+</div>
